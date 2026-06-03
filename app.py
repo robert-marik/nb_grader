@@ -11,6 +11,48 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+
+prompt = """
+Analyzuj následující text studenta a vytvoř zpětnou vazbu zaměřenou výhradně na formální nedostatky.
+
+Požadavky na zpětnou vazbu:
+
+* Používej věcný, profesionální a neutrální tón.
+* Nehodnoť studenta ani jeho schopnosti, zaměř se pouze na text.
+* Nevkládej ironické, zlehčující, mentorující ani hovorové formulace.
+* Nepoužívej obraty typu „tady narážíme na“, „učitelské fajnšmekerství“, „sice funguje, ale“, „správně by bylo“ bez vysvětlení apod.
+* Formát Markdown, matematika pomocí LaTeXu.
+* Jazyk čeština nebo slovenština.
+
+Každou chybu popiš konkrétně:
+* uveď, kde se vyskytuje,
+* vysvětli, v čem spočívá,
+* zdůvodni, proč je daný zápis nebo řešení z formálního hlediska nevhodné nebo nesprávné,
+* uveď doporučení pro opravu.
+
+Pokud je to vhodné, přidej příklad správného zápisu.
+
+Piš tak, aby zpětná vazba sloužila jako seznam konkrétních úprav před odevzdáním opravené verze.
+
+Zaměř se pouze na skutečné formální nedostatky (matematický zápis, notace, struktura řešení, označování veličin, jednotky, odkazy na obrázky/tabulky, typografická pravidla, pravopis apod.).
+
+Nevytvářej chyby, které v textu nejsou.
+
+Pokud je některá část pouze doporučením, nikoliv chybou, označ ji jako „Doporučení“.
+
+Výstup strukturovaně rozděl do jednotlivých bodů.
+
+Musíš se striktně zaměřit na adresnost: v sekci 'oblasti_ke_zlepseni' vždy cituj přesný kus textu/kódu ('kontext_textu') z dokumentu, kterého se kritika týká, aby student přesně věděl, kde udělal chybu. Hodnoť gramatiku, věcnou správnost, strukturu argumentace, čistotu kódu (pokud je přítomen) a dodržování formátu. 
+
+Na závěr přidej stručné shrnutí:
+
+Shrnutí k přepracování
+* bod 1
+* bod 2
+* bod 3
+
+"""
+
 # Pomocná funkce pro konverzi .ipynb do čistého Markdownu
 def convert_ipynb_to_md(file_content):
     try:
@@ -123,14 +165,7 @@ if uploaded_file is not None:
                     }
                     
                     # Systémové instrukce pro mentora
-                    system_instruction = (
-                        "Jsi špičkový akademický mentor, univerzitní profesor a seniorní softwarový inženýr. "
-                        "Tvým úkolem je poskytnout studentovi vysoce detailní, konstruktivní a profesionální zpětnou vazbu na jeho odevzdanou práci. "
-                        "Práce ti bude předložena ve formátu Markdown (případně převedená z Jupyter Notebooku, kde uvidíš i kód a jeho výstupy). "
-                        "Musíš se striktně zaměřit na adresnost: v sekci 'oblasti_ke_zlepseni' vždy cituj přesný kus textu/kódu ('kontext_textu') z dokumentu, "
-                        "kterého se kritika týká, aby student přesně věděl, kde udělal chybu. Hodnoť gramatiku, věcnou správnost, "
-                        "strukturu argumentace, čistotu kódu (pokud je přítomen) a dodržování formátu. Odpovídej výhradně v českém jazyce."
-                    )
+                    system_instruction = prompt
                     
                     # Volání Gemini API
                     config = types.GenerateContentConfig(
