@@ -98,7 +98,7 @@ st.markdown(
 # Postranní panel (Sidebar) pro konfiguraci
 st.sidebar.header("⚙️ Nastavení a API")
 api_key_input = st.sidebar.text_input("Zadejte Google Gemini API Klíč:", type="password", help="Klíč získáte zdarma v Google AI Studio.")
-model_choice = st.sidebar.selectbox("Zvolte model:", ["gemini-2.5-flash", "gemini-2.5-pro"], index=0, help="Flash je extrémně rychlý, Pro je vhodný pro hlubší logickou analýzu.")
+model_choice = st.sidebar.selectbox("Zvolte model:", ["gemini-3.1-flash-lite", "gemini-2.5-flash", "gemini-2.5-pro"], index=0, help="Flash je extrémně rychlý, Pro je vhodný pro hlubší logickou analýzu.")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📝 Jak aplikace funguje:")
